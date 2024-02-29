@@ -180,11 +180,31 @@ void lms:: update(){
             }
 }
 void lms:: Delete(){
-
+    int bid;
+    cout<<"\nEnter the book ID of the book you want to delete: ";
+    cin>>bid;
+    lms *temp=start;
+    //delete first node
+    if(start->id==bid){
+        start=temp->next;
+        delete temp;
+    }
+    //delete any node
+    else{
+    while(temp!=0){
+        if (temp->next->id==bid){
+            delete temp->next;
+            temp->next=temp->next->next;
+            break;
+        }
+        temp=temp->next;
+    }
+    }
+    cout<<"\nBook record deleted";
 }
-void lms:: sort(){
+/*void lms:: sort(){
 
-}
+}*/
 void lms:: count(){
     lms *temp=start;
     int cnt=0;
@@ -199,7 +219,7 @@ int main(){
     int ch;
     char ch1;
     do{
-    cout<<"\n\nWhat do you want to do?: \n1.Accept data\n2.Display data\n3.Search book\n4.Update\n5.Delete\n6.Sort\n7.Count number of distinct books\n8.Exit\n\nEnter your choice: ";
+    cout<<"\n\nWhat do you want to do?: \n1.Accept data\n2.Display data\n3.Search book\n4.Update\n5.Delete\n6.Count number of distinct books\n7.Exit\n\nEnter your choice: ";
     cin>>ch;
     switch(ch){
         case 1:
@@ -216,9 +236,16 @@ int main(){
         case 4:
         ptr->update();
         break;
-        case 7:
+        case 5:
+        ptr->Delete();
+        break;
+        case 6:
         ptr->count();
         break;
+        case 7:
+        exit(0);
+        default:
+        cout<<"\nInvalid choice.";
     }
     cout<<"\nDo you want to continue?(y/n): ";
     cin>>ch1;
