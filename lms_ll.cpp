@@ -14,6 +14,7 @@ void update();
 void Delete();
 void sort();
 void count();
+void swapdata(lms *a,lms *b);
 }*start, *end1;
 
 void lms:: accept(){
@@ -123,7 +124,6 @@ void lms:: update(){
                 cout<<"\nBook ID not found.";
             }
             else{
-                //temp=start;
                 cout<<"\nWhat do you want to update?\n1.Book name\n2.Author\n3.Publisher name\n4.Price\n5.ISBN number\n6.Number of copies\nEnter your choice: ";
             cin>>ch3;
             switch(ch3){
@@ -202,9 +202,45 @@ void lms:: Delete(){
     }
     cout<<"\nBook record deleted";
 }
-/*void lms:: sort(){
+void lms:: sort(){
+    lms *i, *j;
+    for (i = start; i != NULL; i = i->next) {
+        for (j = i->next; j != NULL; j = j->next) {
+            if (i->id > j->id) {
+                swapdata(i, j);
+            }
+        }
+    }
+    cout << "\nBooks sorted by ID." << endl;
+}
 
-}*/
+void lms::swapdata(lms *a, lms *b) {
+    lms temp;
+    temp.id = a->id;
+    temp.title = a->title;
+    temp.author = a->author;
+    temp.publisher = a->publisher;
+    temp.price = a->price;
+    temp.isbn = a->isbn;
+    temp.copies = a->copies;
+
+    a->id = b->id;
+    a->title = b->title;
+    a->author = b->author;
+    a->publisher = b->publisher;
+    a->price = b->price;
+    a->isbn = b->isbn;
+    a->copies = b->copies;
+
+    b->id = temp.id;
+    b->title = temp.title;
+    b->author = temp.author;
+    b->publisher = temp.publisher;
+    b->price = temp.price;
+    b->isbn = temp.isbn;
+    b->copies = temp.copies;
+}
+
 void lms:: count(){
     lms *temp=start;
     int cnt=0;
@@ -219,7 +255,7 @@ int main(){
     int ch;
     char ch1;
     do{
-    cout<<"\n\nWhat do you want to do?: \n1.Accept data\n2.Display data\n3.Search book\n4.Update\n5.Delete\n6.Count number of distinct books\n7.Exit\n\nEnter your choice: ";
+    cout<<"\n\nWhat do you want to do?: \n1.Accept data\n2.Display data\n3.Search book\n4.Update\n5.Delete\n6.Count number of distinct books\n7.Sort\n8.Exit\n\nEnter your choice: ";
     cin>>ch;
     switch(ch){
         case 1:
@@ -243,14 +279,16 @@ int main(){
         ptr->count();
         break;
         case 7:
+        ptr->sort();
+        break;
+        case 8:
         exit(0);
         default:
         cout<<"\nInvalid choice.";
+        break;
     }
     cout<<"\nDo you want to continue?(y/n): ";
     cin>>ch1;
     }while(ch1=='y');
-    //ptr->accept();
-    //ptr->display();
     return 0;
 }
