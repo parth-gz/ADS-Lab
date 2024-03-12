@@ -45,6 +45,7 @@ else{
 
 }
 void lms:: display(){
+    cout<<"\n--------------Library Data---------------\n"<<endl;
     lms *temp=start;
     if(temp==NULL){
         cout<<"\nList is empty.";
@@ -263,9 +264,8 @@ int main(){
         ptr->accept();
         break;
         case 2:
-        cout<<"\n--------------Library Data---------------\n"<<endl;
-            ptr->display();
-            break;
+        ptr->display();
+        break;
         case 3:
         ptr->search();
         break;

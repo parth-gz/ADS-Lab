@@ -19,8 +19,12 @@ public:
     // void sort();
     void count();
 } *start, *end1;
+
+
 void cms::accept()
-{
+{   
+    cout << "\n--------------Enter data---------------\n"
+                 << endl;
     cms *newnode;
     int f = 0;
     newnode = new cms;
@@ -84,6 +88,8 @@ void cms::accept()
 }
 void cms::display()
 {
+    cout << "\n--------------Charity Data---------------\n"
+                 << endl;
     cms *temp = start;
     if (temp == NULL)
     {
@@ -318,18 +324,14 @@ int main()
     char ch1;
     do
     {
-        cout << "\n\nWhat do you want to do?: \n1.Accept data\n2.Display data\n3.Search donor\n4.Update\n5.Delete\n6.Count number of donors\n7.Exit\n\nEnter your choice: ";
+        cout << "\n\nWhat do you want to do?: \n1.Accept data\n2.Display data\n3.Search donor\n4.Update\n5.Delete\n6.Count number of donors\n7.Sort\n8.Exit\n\nEnter your choice: ";
         cin >> ch;
         switch (ch)
         {
         case 1:
-            cout << "\n--------------Enter data---------------\n"
-                 << endl;
             ptr->accept();
             break;
         case 2:
-            cout << "\n--------------Charity Data---------------\n"
-                 << endl;
             ptr->display();
             break;
         case 3:
@@ -345,6 +347,9 @@ int main()
             ptr->count();
             break;
         case 7:
+            ptr->sort();
+            break;
+        case 8:
             exit(0);
         default:
             cout << "\nInvalid choice.";
