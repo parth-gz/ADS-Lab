@@ -289,6 +289,6 @@ int main(){
     }
     cout<<"\nDo you want to continue?(y/n): ";
     cin>>ch1;
-    }while(ch1=='y');
+    }while(ch1=='y'||ch1=='Y');
     return 0;
 }
