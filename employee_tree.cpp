@@ -1,69 +1,68 @@
-
 #include<iostream>
 #include<string>
 #include<iomanip>
 #define max 20 
 using namespace std ;
 int count,count1,count2 ;
-class family
+class employee
 {
-      int age,ger ;
-      string name, gen ;
-      family *lchild, *rchild ;
+      int salary,eid ;
+      string name, address ;
+      employee *lchild, *rchild ;
       public :
             void accept() ;
-            void insert(family *root, family *next) ;
-            void display(family *root);
-            void leaf(family *root);
+            void insert(employee *root, employee *next) ;
+            void display(employee *root);
+            void leaf(employee *root);
             void countGen() ;
 }*root, *st[max];
-void family :: accept()
+void employee :: accept()
 {
      
-     family *next ;
+     employee *next ;
      char choice;
-     root = new family ;
-     cout<<"Enter details of the family member: \n" ;
-     cout<<"Enter the generation number :" ;
-     cin>>root->ger ;
-     cout<<"Enter name of the family member :" ;
+     root = new employee ;
+     cout<<"Enter details of the employee: \n" ;
+     cout<<"Enter the employee ID :" ;
+     cin>>root->eid ;
+     cout<<"Enter name of the employee :" ;
      cin>>root->name ;
-     cout<<"Enter age :" ;
-     cin>>root->age ;
-     cout<<"Enter gender: " ;
-     cin>>root->gen ;
+     cout<<"Enter salary :" ;
+     cin>>root->salary ;
+     cout<<"Enter address: " ;
+     cin>>root->address ;
      cout<<endl;
      root->lchild =root->rchild = NULL ;
      count++ ;
      count1 = count2 = count ;
      do
      {
-           cout<<"\nDo you want to add more family information (y/n):" ;
+           cout<<"\nDo you want to add more employee information (y/n):" ;
             cin >> choice ;
            if(choice == 'y'||choice=='Y')
           {
-                next = new family ;
-                cout << "\nEnter details of the family member -->\n";
-                cout << "\nEnter generation number :";
-                cin >> next->ger;
-                cout << "\nEnter name of the family member :";
+                next = new employee ;
+                cout << "\nEnter details of the employee -->\n";
+                cout << "\nEnter employee ID :";
+                cin >> next->eid;
+                cout << "\nEnter name of the employee :";
                 cin >> next->name;
-                cout << "\nEnter age: ";
-                cin >> next->age;
-                cout << "\nEnter gender: ";
-                cin >> next->gen;
+                cout << "\nEnter salary: ";
+                cin >> next->salary;
+                cout << "\nEnter address: ";
+                cin >> next->address;
                 next->lchild = next->rchild = 0;
                 insert(root, next);
           }
           
      }while(choice == 'y'||choice=='Y') ;
 }
-void family :: insert(family *root, family *next)
+void employee :: insert(employee *root, employee *next)
 {
-    char chr ;
-    cout<<"\nDo you want to insert to the right or to the left of member \""<<root->name<<"\"\t(L/R): " ;
-    cin>>chr ;
-    if(chr == 'l' || chr == 'L')
+    //char chr ;
+    //cout<<"\nDo you want to insert to the right or to the left of member \""<<root->name<<"\"\t(L/R): " ;
+    //cin>>chr ;
+    if(root->salary>next->salary)
     {
           if( root->lchild == NULL)
           {
@@ -75,7 +74,7 @@ void family :: insert(family *root, family *next)
               insert(root->lchild , next) ;
           }
     }
-    else if(chr == 'r' || chr == 'R')
+    else if(root->salary<next->salary)
     {
           if( root->rchild == NULL)
           {
@@ -88,16 +87,16 @@ void family :: insert(family *root, family *next)
           }
     }   
 }
-void family :: display(family *root)
+void employee :: display(employee *root)
 {   cout<<endl;
     //cout<<"\ngenration"<<"\t"<<"name"<<"\t"<<"age"<<"\t"<<"gender" ;
-    cout<<setw(15)<<left <<"generation";
+    cout<<setw(15)<<left <<"Employee ID";
     cout<<setw(20)<<left <<"Name";
-    cout<<setw(15)<<left <<"Age";
-    cout<<setw(10)<<left <<"Gender";
+    cout<<setw(15)<<left <<"Salary";
+    cout<<setw(10)<<left <<"Address";
     cout<<endl;
       int top = -1 ;
-      family *temp ;
+      employee *temp ;
       temp = root ;
       
       if(temp != NULL)
@@ -113,10 +112,10 @@ void family :: display(family *root)
               if(top != -1)
               {
                   temp = st[top];
-                   cout<<setw(15)<<left <<temp->ger;
+                   cout<<setw(15)<<left <<temp->eid;
                   cout<<setw(20)<<left <<temp->name;
-                  cout<<setw(15)<<left <<temp->age;
-                  cout<<setw(10)<<left <<temp->gen<<endl;
+                  cout<<setw(15)<<left <<temp->salary;
+                  cout<<setw(10)<<left <<temp->address<<endl;
                   //cout<<"\n"<<temp->ger<<"\t"<<temp->name<<"\t"<<temp->age<<"\t"<<temp->gen ;
                   temp = temp -> rchild ;
               }
@@ -124,15 +123,15 @@ void family :: display(family *root)
           }while(temp != NULL || top != -1);
      }
 }
-void family :: leaf(family *root)
+void employee :: leaf(employee *root)
 {
-    cout<<setw(15)<<left <<"generation";
+    cout<<setw(15)<<left <<"Employee ID";
     cout<<setw(20)<<left <<"Name";
-    cout<<setw(15)<<left <<"Age";
-    cout<<setw(10)<<left <<"Gender";
+    cout<<setw(15)<<left <<"Salary";
+    cout<<setw(10)<<left <<"Address";
     cout<<endl;
       int top = -1 ;
-      family *temp ;
+      employee *temp ;
       temp = root ;
       
       if(temp != NULL)
@@ -151,10 +150,10 @@ void family :: leaf(family *root)
                   if(temp->lchild == NULL && temp->rchild == NULL)
                   {
                   //cout<<"\n"<<temp->ger<<"\t"<<temp->name<<"\t"<<temp->age<<"\t"<<temp->gen ;
-                  cout<<setw(15)<<left <<temp->ger;
+                  cout<<setw(15)<<left <<temp->eid;
                   cout<<setw(20)<<left <<temp->name;
-                  cout<<setw(15)<<left <<temp->age;
-                  cout<<setw(10)<<left <<temp->gen<<endl;
+                  cout<<setw(15)<<left <<temp->salary;
+                  cout<<setw(10)<<left <<temp->address<<endl;
                   }
                   temp = temp -> rchild ;
               }
@@ -162,20 +161,20 @@ void family :: leaf(family *root)
           }while(temp != NULL || top != -1);
      }
 }
-void family :: countGen()
+void employee :: countGen()
 {
    if(count1 >= count2)
    {
-      cout <<"\nHeight of family tree is :"<<count1;
+      cout <<"\nHeight of employee tree is :"<<count1;
    }
    else
    {
-       cout<<"\nHeight of Family tree is :"<<count2 ; 
+       cout<<"\nHeight of employee tree is :"<<count2 ; 
    }
 }
 int main()
 {
-    family f ;
+    employee e ;
     int choice ;
     char ch;
     do
@@ -184,7 +183,7 @@ int main()
          cout<<"\n1.Accept" ;
          cout<<"\n2.Display" ;
          cout<<"\n3.Display Leaf Node" ;
-         cout<<"\n4.Count Generations" ;
+         cout<<"\n4.Count Height of the Employee tree" ;
          cout<<"\n5.Exit" ;
          cout<<"\nEnter your choice :" ;
          cin>>choice ;
@@ -192,18 +191,18 @@ int main()
          switch(choice)
          {
               case 1 :
-                    f.accept() ;
+                    e.accept() ;
                     break ;
               case 2 :
                     //cout<<"\ngenration"<<"\t"<<"name"<<"\t"<<"age"<<"\t"<<"gender" ;
-                    f.display(root) ;
+                    e.display(root) ;
                     break ;
               case 3 :
                     //cout<<"\ngenration"<<"\t"<<"name"<<"\t"<<"age"<<"\t"<<"gender" ;
-                    f.leaf(root);
+                    e.leaf(root);
                     break ;
               case 4 :
-                    f.countGen() ;
+                    e.countGen() ;
                     break ;
               case 5 :
                     exit(0) ;
